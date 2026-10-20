@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      FxSound dark theme — inspired by FxSound's dark UI palette.
+
+      Color reference from Resource 10115:
+        ButtonBackgroundPointerOver: #E5F1FB → translated to dark: #1E2A3A
+        ButtonBorderBrushPointerOver: #0078D7 → adapted to #00BCD4 (cyan)
+        ButtonBackgroundPressed: #CCE4F7 → dark: #0D1A2A
+
+      App-wide colors:
+        Primary accent: #00BCD4 (cyan/teal — FxSound's highlight color)
+        Background: #0D0D1A (near-black)
+        Surface: #1A1A2E
+        Text primary: #FFFFFF
+        Text secondary: #8888AA
+    -->
+    <color name="colorPrimary">#00BCD4</color>
+    <color name="colorPrimaryVariant">#00838F</color>
+    <color name="colorSecondary">#00E5FF</color>
+    <color name="colorBackground">#0D0D1A</color>
+    <color name="colorSurface">#1A1A2E</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnBackground">#FFFFFF</color>
+    <color name="colorOnSurface">#FFFFFF</color>
+</resources>

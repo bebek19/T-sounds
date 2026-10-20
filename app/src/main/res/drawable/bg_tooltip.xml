@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Tooltip background — mirrors FxSound Resource 10117:
+  <Grid BorderBrush="DarkGray" BorderThickness="0.5" CornerRadius="5" Margin="10">
+    <TextBlock x:Name="mText" Margin="5,5,5,20" FontSize="12"/>
+  </Grid>
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="8dp"/>
+    <solid android:color="#1A1A2E"/>
+    <stroke android:color="#2D2D44" android:width="1dp"/>
+</shape>

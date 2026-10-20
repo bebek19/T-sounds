@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  activity_main.xml — FxSound-inspired Audio Equalizer UI
+
+  Layout correspondence to FxSound resources:
+  - Top power toggle: SpriteSheetButton (Resource 10109 — Button sprite-sheet pattern)
+  - Spectrum view: SpectrumVisualizerView (FxSound core visual feedback)
+  - Preset list: RecyclerView (Resource 10111 ComboBox + Resource 10110 TreeView)
+  - EQ bands: LinearLayout of EqBandViews (Resource 10117 tooltip target)
+  - Enhancement toggles: SpriteSheetButton (Resource 10108 CheckBox pattern)
+  - Action buttons: TextView buttons (Resource 10115 standard button style)
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0D0D1A"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="0dp">
+
+        <!-- ===== HEADER ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="16dp"
+            android:gravity="center_vertical"
+            android:background="#12121F">
+
+            <!-- App title -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FxSound"
+                    android:textColor="#00E5FF"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05"/>
+
+                <TextView
+                    android:id="@+id/tvCurrentPreset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Flat"
+                    android:textColor="#8888AA"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <!-- Power toggle (SpriteSheetButton — mirrors Resource 10109) -->
+            <com.fxsound.equalizer.SpriteSheetButton
+                android:id="@+id/btnPower"
+                android:layout_width="80dp"
+                android:layout_height="40dp"/>
+        </LinearLayout>
+
+        <!-- ===== SPECTRUM VISUALIZER ===== -->
+        <com.fxsound.equalizer.SpectrumVisualizerView
+            android:id="@+id/spectrumView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="#0A0A18"/>
+
+        <!-- ===== PRESET LIST (mirrors Resource 10110 TreeView + 10111 ComboBox) ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PRESETS"
+            android:textColor="#44FFFFFF"
+            android:textSize="10sp"
+            android:letterSpacing="0.15"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPresets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"/>
+
+        <!-- ===== EQ SECTION ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="EQUALIZER"
+                android:textColor="#44FFFFFF"
+                android:textSize="10sp"
+                android:letterSpacing="0.15"/>
+
+            <!-- Tooltip panel (mirrors Resource 10117 — Grid + TextBlock mText) -->
+            <TextView
+                android:id="@+id/tvBandTooltip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#00E5FF"
+                android:textSize="11sp"
+                android:textAlignment="center"
+                android:background="@drawable/bg_tooltip"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <!-- EQ band sliders container -->
+        <LinearLayout
+            android:id="@+id/eqLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:weightSum="5"/>
+
+        <!-- ===== ENHANCEMENTS (CheckBox pattern — Resource 10108) ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ENHANCEMENTS"
+            android:textColor="#44FFFFFF"
+            android:textSize="10sp"
+            android:letterSpacing="0.15"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:gravity="center_vertical">
+
+            <!-- Bass Boost toggle -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="8dp">
+
+                <com.fxsound.equalizer.SpriteSheetButton
+                    android:id="@+id/btnBassBoost"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bass Boost"
+                    android:textColor="#8888AA"
+                    android:textSize="11sp"
+                    android:layout_marginTop="6dp"/>
+            </LinearLayout>
+
+            <!-- Surround toggle -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="8dp">
+
+                <com.fxsound.equalizer.SpriteSheetButton
+                    android:id="@+id/btnSurround"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Surround"
+                    android:textColor="#8888AA"
+                    android:textSize="11sp"
+                    android:layout_marginTop="6dp"/>
+            </LinearLayout>
+
+            <!-- Clarity toggle -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="8dp">
+
+                <com.fxsound.equalizer.SpriteSheetButton
+                    android:id="@+id/btnClarity"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clarity"
+                    android:textColor="#8888AA"
+                    android:textSize="11sp"
+                    android:layout_marginTop="6dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ===== ACTION BUTTONS (Resource 10115 standard button style) ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="32dp"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/btnReset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RESET"
+                android:textColor="#8888AA"
+                android:textSize="12sp"
+                android:letterSpacing="0.1"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12dp"
+                android:background="@drawable/bg_button_secondary"
+                android:layout_marginEnd="12dp"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <TextView
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SAVE PRESET"
+                android:textColor="#00E5FF"
+                android:textSize="12sp"
+                android:letterSpacing="0.1"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12dp"
+                android:background="@drawable/bg_button_primary"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
